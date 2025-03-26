@@ -1,4 +1,4 @@
-## Live Demo  [#Click here to view the live demo]
+## Live Demo  (https://multi-functional-clock.vercel.app/)
 
 
 # Multi-functional Clock
