@@ -1,0 +1,771 @@
+/* Base styles and variables */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --background-color: #f5f5f5;
+    --card-background: #ffffff;
+    --text-color: #333333;
+    --border-color: #dddddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --transition-speed: 0.3s;
+    --border-radius: 10px;
+}
+
+.dark-theme {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --background-color: #121212;
+    --card-background: #1e1e1e;
+    --text-color: #f5f5f5;
+    --border-color: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50%;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+h1:hover::after {
+    width: 100%;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#theme-toggle::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(52, 152, 219, 0.1);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+#theme-toggle:hover::before {
+    transform: scale(1);
+}
+
+#theme-toggle:hover {
+    transform: rotate(30deg);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+    position: relative;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all var(--transition-speed);
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: -1;
+}
+
+.tab-btn:hover::before {
+    transform: translateY(0);
+}
+
+.tab-btn:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-speed);
+}
+
+.tab-btn.active:after,
+.tab-btn:hover:after {
+    width: 100%;
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all var(--transition-speed);
+    transform: translateY(10px);
+    opacity: 0;
+}
+
+.tab-content.active {
+    display: block;
+    animation: slideUp 0.5s forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Clock Tab */
+.clock-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.digital-clock {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.digital-clock:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+#time {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#date {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+/* Analog Clock */
+.analog-clock {
+    width: 250px;
+    height: 250px;
+    margin: 20px;
+    transition: transform 0.3s ease;
+}
+
+.analog-clock:hover {
+    transform: scale(1.05);
+}
+
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--card-background);
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 0 20px var(--shadow-color), inset 0 0 10px var(--shadow-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.analog-clock:hover .clock-face {
+    box-shadow: 0 0 25px var(--primary-color), inset 0 0 15px var(--shadow-color);
+}
+
+.marking {
+    position: absolute;
+    width: 5px;
+    height: 15px;
+    background-color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+.marking-12 {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.marking-3 {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.marking-6 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.marking-9 {
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    background-color: var(--text-color);
+    border-radius: 10px;
+    transform: translateX(-50%);
+}
+
+.hour-hand {
+    width: 6px;
+    height: 60px;
+    background-color: var(--text-color);
+    transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.3, 1);
+}
+
+.minute-hand {
+    width: 4px;
+    height: 80px;
+    background-color: var(--secondary-color);
+    transition: transform 0.5s cubic-bezier(0.4, 2.3, 0.3, 1);
+}
+
+.second-hand {
+    width: 2px;
+    height: 90px;
+    background-color: var(--danger-color);
+    transition: transform 0.1s cubic-bezier(0.4, 2.3, 0.3, 1);
+}
+
+.center-point {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--danger-color);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 5px var(--danger-color);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+    }
+}
+
+/* Timezone Selector */
+.timezone-selector {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease;
+}
+
+.timezone-selector:hover {
+    transform: translateY(-3px);
+}
+
+#timezone {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-background);
+    color: var(--text-color);
+    font-size: 1rem;
+    margin-left: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+#timezone:hover,
+#timezone:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+/* Stopwatch Tab */
+.stopwatch {
+    text-align: center;
+}
+
+.stopwatch-display {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 20px 0;
+    font-family: monospace;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgba(52, 152, 219, 0.05);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease;
+}
+
+.stopwatch-display:hover {
+    transform: scale(1.02);
+}
+
+.stopwatch-controls,
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stopwatch-controls button,
+.timer-controls button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stopwatch-controls button::before,
+.timer-controls button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.stopwatch-controls button:hover::before,
+.timer-controls button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.stopwatch-controls button:hover,
+.timer-controls button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.stopwatch-controls button:active,
+.timer-controls button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+#stopwatch-reset,
+#timer-reset {
+    background-color: var(--danger-color);
+}
+
+#stopwatch-reset:hover,
+#timer-reset:hover {
+    background-color: #c0392b;
+}
+
+#stopwatch-stop,
+#timer-stop {
+    background-color: var(--warning-color);
+}
+
+#stopwatch-stop:hover,
+#timer-stop:hover {
+    background-color: #e67e22;
+}
+
+.laps-container {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(52, 152, 219, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.laps-container:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#laps-list {
+    list-style-type: none;
+}
+
+#laps-list li {
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#laps-list li:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: translateX(5px);
+}
+
+#laps-list li:last-child {
+    border-bottom: none;
+}
+
+/* Timer Tab */
+.timer {
+    text-align: center;
+}
+
+.timer-setup {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease;
+}
+
+.timer-setup:hover {
+    transform: translateY(-5px);
+}
+
+.timer-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.timer-input label {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.timer-input input {
+    width: 70px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    background-color: var(--card-background);
+    color: var(--text-color);
+    font-size: 1.2rem;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timer-input input:hover,
+.timer-input input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.timer-display {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 25px 0;
+    font-family: monospace;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: rgba(52, 152, 219, 0.05);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.timer-display.warning {
+    color: var(--warning-color);
+    animation: pulse-warning 1s infinite;
+}
+
+.timer-display.danger {
+    color: var(--danger-color);
+    animation: pulse-danger 0.5s infinite;
+}
+
+@keyframes pulse-warning {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse-danger {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.timer-progress {
+    height: 10px;
+    width: 100%;
+    background-color: var(--border-color);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.timer-progress-bar {
+    height: 100%;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    transition: width 1s linear;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .clock-container {
+        flex-direction: column;
+    }
+
+    .analog-clock {
+        width: 200px;
+        height: 200px;
+    }
+
+    #time {
+        font-size: 2.5rem;
+    }
+
+    .stopwatch-display,
+    .timer-display {
+        font-size: 2.5rem;
+        padding: 15px 10px;
+    }
+
+    .timer-setup {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .timer-input {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+
+    .stopwatch-controls,
+    .timer-controls {
+        flex-wrap: wrap;
+    }
+
+    .stopwatch-controls button,
+    .timer-controls button {
+        flex: 1 0 40%;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .tabs {
+        flex-direction: column;
+        border-bottom: none;
+    }
+
+    .tab-btn {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+        padding: 12px 0;
+    }
+
+    .tab-btn:last-child {
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .analog-clock {
+        width: 180px;
+        height: 180px;
+    }
+
+    #time {
+        font-size: 2rem;
+    }
+
+    .stopwatch-display,
+    .timer-display {
+        font-size: 2rem;
+    }
+
+    .timer-input input {
+        width: 60px;
+        padding: 8px;
+    }
+
+    .stopwatch-controls button,
+    .timer-controls button {
+        flex: 1 0 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Animations for page load */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    animation: fadeIn 1s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}

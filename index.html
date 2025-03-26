@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/clock logo.jpg" type="image/x-icon">
+    <title>Multi-functional Clock</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Multi-functional Clock</h1>
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <span class="toggle-icon">🌙</span>
+            </button>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="clock">Clock</button>
+            <button class="tab-btn" data-tab="stopwatch">Stopwatch</button>
+            <button class="tab-btn" data-tab="timer">Timer</button>
+        </div>
+
+        <div class="tab-content active" id="clock-tab">
+            <div class="clock-container">
+                <div class="digital-clock">
+                    <div id="time">00:00:00 AM</div>
+                    <div id="date">Monday, January 1, 2023</div>
+                </div>
+                
+                <div class="analog-clock">
+                    <div class="clock-face">
+                        <div class="marking marking-12"></div>
+                        <div class="marking marking-3"></div>
+                        <div class="marking marking-6"></div>
+                        <div class="marking marking-9"></div>
+                        <div class="hand hour-hand"></div>
+                        <div class="hand minute-hand"></div>
+                        <div class="hand second-hand"></div>
+                        <div class="center-point"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timezone-selector">
+                <label for="timezone">Select Timezone:</label>
+                <select id="timezone">
+                    <option value="local">Local Time</option>
+                    <option value="UTC">UTC</option>
+                    <option value="America/New_York">New York (EST/EDT)</option>
+                    <option value="America/Los_Angeles">Los Angeles (PST/PDT)</option>
+                    <option value="Europe/London">London (GMT/BST)</option>
+                    <option value="Europe/Paris">Paris (CET/CEST)</option>
+                    <option value="Asia/Tokyo">Tokyo (JST)</option>
+                    <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tab-content" id="stopwatch-tab">
+            <div class="stopwatch">
+                <div class="stopwatch-display">00:00:00.000</div>
+                <div class="stopwatch-controls">
+                    <button id="stopwatch-start">Start</button>
+                    <button id="stopwatch-stop">Stop</button>
+                    <button id="stopwatch-reset">Reset</button>
+                </div>
+                <div class="laps-container">
+                    <h3>Laps</h3>
+                    <ul id="laps-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="timer-tab">
+            <div class="timer">
+                <div class="timer-setup">
+                    <div class="timer-input">
+                        <label for="hours">Hours</label>
+                        <input type="number" id="hours" min="0" max="23" value="0">
+                    </div>
+                    <div class="timer-input">
+                        <label for="minutes">Minutes</label>
+                        <input type="number" id="minutes" min="0" max="59" value="0">
+                    </div>
+                    <div class="timer-input">
+                        <label for="seconds">Seconds</label>
+                        <input type="number" id="seconds" min="0" max="59" value="0">
+                    </div>
+                </div>
+                <div class="timer-progress">
+                    <div class="timer-progress-bar"></div>
+                </div>
+                <div class="timer-display">00:00:00</div>
+                <div class="timer-controls">
+                    <button id="timer-start">Start</button>
+                    <button id="timer-stop">Pause</button>
+                    <button id="timer-reset">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
